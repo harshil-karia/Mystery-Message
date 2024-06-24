@@ -26,12 +26,13 @@ import axios from "axios"
 import { ApiResponse } from "@/types/APIResponse"
 
 
+
 type MessageCardProps = {
     message: Message;
-    onMessageDelete: (messageId: string) => void;
+    onMessageDelete: (messageId?: string) => void;
 }
 
-const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
+const MessageCard = ({ message, onMessageDelete}: MessageCardProps) => {
     const { toast } = useToast()
     const handleDeleteConfirm = async () => {
         const response = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
@@ -40,10 +41,17 @@ const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
         })
         onMessageDelete(message._id)
     }
+    const formatDate = (isoDateString: Date) => {
+        const date = new Date(isoDateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+      };
   return (
     <Card>
         <CardHeader>
-            <CardTitle>Card Title</CardTitle>
+            <CardTitle>{message.content}</CardTitle>
             <AlertDialog>
             <AlertDialogTrigger asChild>
                 <Button variant="destructive"><X className="w-5 h-5"/></Button>
@@ -63,7 +71,7 @@ const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
             </AlertDialogContent>
             </AlertDialog>
 
-            <CardDescription>Card Description</CardDescription>
+            <CardDescription>{formatDate(message.createdAt)}</CardDescription>
         </CardHeader>
         <CardContent>
             

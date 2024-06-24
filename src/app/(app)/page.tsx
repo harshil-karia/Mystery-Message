@@ -30,7 +30,7 @@ const Home = () => {
                       {message.title}
                     </CardHeader>
                     <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-xl font-semibold">{message.content}</span>
+                      <span className="text-3xl font-semibold">{message.content}</span>
                     </CardContent>
                   </Card>
                 </div>
