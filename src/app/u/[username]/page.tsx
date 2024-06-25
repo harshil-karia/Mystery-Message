@@ -44,7 +44,7 @@ export default function SendMessage() {
     isLoading: isSuggestLoading,
     error,
   } = useCompletion({
-    api: '/api/suggest-messages',
+    api: '/api/suggest-message',
     initialCompletion: initialMessageString,
   });
 
@@ -88,7 +88,13 @@ export default function SendMessage() {
 
   const fetchSuggestedMessages = async () => {
     try {
-      complete('');
+      //If have api key the uncomment complete function
+      //complete('')
+      toast({
+        title: 'Opps! Sorry',
+        description: 'Currently AI messages are not available',
+        variant: 'destructive'       
+      })
     } catch (error) {
       console.error('Error fetching messages:', error);
       // Handle error appropriately

@@ -15,6 +15,7 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { acceptMessageSchema } from '@/schemas/acceptMessageSchema';
+import { useRouter } from 'next/navigation';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -22,6 +23,7 @@ function UserDashboard() {
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
 
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleDeleteMessage = (messageId: string) => {
     setMessages(messages.filter((message) => message._id !== messageId));
@@ -86,12 +88,13 @@ function UserDashboard() {
 
   // Fetch initial state from the server
   useEffect(() => {
+    console.log('Fetching messages and accept messages');
     if (!session || !session.user) return;
-
+  
     fetchMessages();
-
+  
     fetchAcceptMessages();
-  }, [session, setValue, toast, fetchAcceptMessages, fetchMessages]);
+  }, [session, setValue, fetchAcceptMessages, fetchMessages]);
 
   // Handle switch change
   const handleSwitchChange = async () => {
@@ -117,20 +120,25 @@ function UserDashboard() {
   };
 
   if (!session || !session.user) {
-    return <div></div>;
+    router.replace('/')
+    return <div></div>
   }
 
   const { username } = session.user as User;
 
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${username}`;
+  // const baseUrl = `${window.location.protocol}//${window.location.host}`;
+  // const profileUrl = `${baseUrl}/u/${username}`;
+
+  const profileUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/u/${username}`;
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(profileUrl);
-    toast({
-      title: 'URL Copied!',
-      description: 'Profile URL has been copied to clipboard.',
-    });
+    if (typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText(profileUrl);
+      toast({
+        title: 'URL Copied!',
+        description: 'Profile URL has been copied to clipboard.',
+      });
+    }
   };
 
   return (

@@ -38,7 +38,7 @@ const page = () => {
         identifier: data.identifier,
         password: data.password
       })
-      console.log(response)
+      //console.log(response)
       if(response?.error){
         toast({
           title: 'Login Failed',
@@ -118,7 +118,7 @@ const page = () => {
           <p>
             Don't have a account ? {' '}
             <Link href='/sign-up' className="text-blue-600 hover: text-blue-800">
-              Sign In
+              Sign Up
             </Link>
           </p>
         </div>
