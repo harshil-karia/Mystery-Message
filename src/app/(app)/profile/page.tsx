@@ -28,23 +28,19 @@ const Profile: React.FC = () => {
 
   return (
     
-        
         <div className="flex justify-center items-center min-h-screen">
          {   
         session ? (
-            
                 <ProfileCard 
                     username={username}
                     email={email}
                 />
-            
         ):(
             <>
             </>
         )
     }
     </div>
-    
   );
 }
 

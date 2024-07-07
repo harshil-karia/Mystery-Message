@@ -19,6 +19,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ username, email }) => {
     const handleSignOut = () => {
         signOut();
     }
+    const handleUpdate = () => {
+      router.replace(`/update/${username}`)
+    }
 
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -40,7 +43,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ username, email }) => {
             </div>
           </form>
           <div className="mt-4 flex justify-between">
-            <Button className="mr-4">Update Details</Button>
+            <Button className="mr-4" onClick={handleUpdate}>Update Username</Button>
             <Button onClick={handleSignOut}>Logout</Button>
           </div>
         </CardContent>

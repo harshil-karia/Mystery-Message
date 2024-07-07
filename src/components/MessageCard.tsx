@@ -84,7 +84,6 @@ const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-
         <CardDescription>{formatDate(message.createdAt)}</CardDescription>
       </CardHeader>
       <CardContent>
