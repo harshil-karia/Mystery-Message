@@ -14,7 +14,7 @@ import { ApiResponse } from '@/types/APIResponse'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { Result } from 'postcss'
+import Script from 'next/script'
 
 const page = () => {
 
@@ -111,7 +111,7 @@ const page = () => {
                   </>
                 ) : ('SignIn')
               }
-            </Button>          
+            </Button><br/><br/>          
           </form>
         </Form>
         <div className="text-center mt-4">

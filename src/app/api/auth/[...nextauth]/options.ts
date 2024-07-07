@@ -3,6 +3,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/model/User';
+import GoogleProvider from "next-auth/providers/google";
+
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -43,13 +45,14 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  callbacks: {
+  callbacks: {      
     async jwt({ token, user }) {
       if (user) {
         token._id = user._id?.toString(); // Convert ObjectId to string
         token.isVerified = user.isVerified;
         token.isAcceptingMessages = user.isAcceptingMessages;
         token.username = user.username;
+        token.email = user.email
       }
       return token;
     },
@@ -59,6 +62,7 @@ export const authOptions: NextAuthOptions = {
         session.user.isVerified = token.isVerified;
         session.user.isAcceptingMessages = token.isAcceptingMessages;
         session.user.username = token.username;
+        session.user.email = token.email
       }
       return session;
     },

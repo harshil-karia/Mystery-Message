@@ -6,11 +6,11 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import {  useDebounceCallback } from 'usehooks-ts'
 import { useToast } from "@/components/ui/use-toast"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { signUpSchema } from "@/schemas/signUpSchema"
 import axios, {AxiosError} from 'axios'
 import { ApiResponse } from "@/types/APIResponse"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
@@ -84,7 +84,9 @@ const page = () => {
       setIsSubmitting(false)
     }
   }
-
+  const handleGoogle = () => {
+    router.replace('/googleUsername')
+  }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
@@ -153,7 +155,7 @@ const page = () => {
                   </>
                 ) : ('SignUp')
               }
-            </Button>          
+            </Button><br /><br />          
           </form>
         </Form>
         <div className="text-center mt-4">

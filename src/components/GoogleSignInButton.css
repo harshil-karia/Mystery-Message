@@ -1,0 +1,37 @@
+/* styles/GoogleSignInButton.module.css */
+.google-signin-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #757575;
+  }
+  
+  .google-signin-button:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .google-signin-button__icon-wrapper {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .google-signin-button__icon {
+    width: 100%;
+    height: auto;
+  }
+  
+  .google-signin-button__text {
+    margin-left: 5px;
+  }
+  

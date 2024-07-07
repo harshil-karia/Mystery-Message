@@ -130,7 +130,6 @@ function UserDashboard() {
   // const profileUrl = `${baseUrl}/u/${username}`;
 
   const profileUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/u/${username}`;
-
   const copyToClipboard = () => {
     if (typeof navigator !== 'undefined') {
       navigator.clipboard.writeText(profileUrl);
