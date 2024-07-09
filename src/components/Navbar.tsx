@@ -27,9 +27,16 @@ const Navbar = () => {
               </Link>
             )
           ) : (
-            <Link className='w-full md:w-auto' href='/sign-in'>
+            url === '/sign-in' ? (
+              <Link className='w-full md:w-auto' href='/sign-up'>
+              <Button>SignUp</Button>
+            </Link>
+            ) : (
+              <Link className='w-full md:w-auto' href='/sign-in'>
               <Button>Login</Button>
             </Link>
+            )
+            
           )
         }
       </div>

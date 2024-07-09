@@ -3,16 +3,26 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
+import { updateUsernameSchema } from '@/schemas/updateUsernameSchema'
+import { verifySchema } from '@/schemas/verifySchema'
 import { ApiResponse } from '@/types/APIResponse'
+import { zodResolver } from '@hookform/resolvers/zod'
 import axios, { AxiosError } from 'axios'
 import { Loader2 } from 'lucide-react'
+import { getServerSession } from 'next-auth'
+import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDebounceCallback } from 'usehooks-ts'
-import { z } from 'zod'
+import { string, z } from 'zod'
 
-const ChangeUsernameForm = () => {
+interface ChangeUsernameFormProps {
+    oldUsername: string;
+}
+  
+
+const ChangeUsernameForm: React.FC<ChangeUsernameFormProps>  = ({oldUsername}) => {
 
     const [isSubmitting, setIsSubmiting] = useState(false)
     const [isCheckingUsername, setIsCheckingUsername] = useState(false)
@@ -43,11 +53,38 @@ const ChangeUsernameForm = () => {
         }
         checkUsernameUnique()
       },[username])
-    const form = useForm<z.infer<any>>({
 
+    const form = useForm<z.infer<typeof updateUsernameSchema>>({
+        resolver: zodResolver(updateUsernameSchema),
+        defaultValues: {
+            oldUsername: oldUsername,
+            username: '',
+            password: ''
+        }
       })
-      const onSubmit = () => {
-
+      const onSubmit = async (data: z.infer<typeof updateUsernameSchema>) => {
+        setIsSubmiting(true)
+        try {
+            const response = await axios.patch<ApiResponse>('/api/updateUsername',data)
+            console.log(response)
+            toast({
+                title: "Changed Successfully",
+                description: response.data.message
+            })
+            router.replace('/sign-in')
+            signOut({ callbackUrl: '/sign-in' })
+        } catch (error) {
+            console.error('Error in sign-up', error)
+            const axiosError = error as AxiosError<ApiResponse>
+            let errorMessage = axiosError.response?.data.message
+            toast({
+                title: 'Error in  changing',
+                description: errorMessage,
+                variant: "destructive"
+            })
+        } finally {
+            setIsSubmiting(false)
+        }
       }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -85,7 +122,7 @@ const ChangeUsernameForm = () => {
             />
             
             <FormField
-              name="password"
+              name='password'
               control={form.control}
               render={({ field }) => (
                 <FormItem>
