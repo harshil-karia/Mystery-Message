@@ -9,12 +9,10 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
-import axios, { AxiosError } from 'axios'
-import { ApiResponse } from '@/types/APIResponse'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import Script from 'next/script'
+
 
 const page = () => {
 
@@ -38,7 +36,6 @@ const page = () => {
         identifier: data.identifier,
         password: data.password
       })
-      //console.log(response)
       if(response?.error){
         toast({
           title: 'Login Failed',
@@ -65,6 +62,9 @@ const page = () => {
     } finally {
       setIsSubmitting(false)
     }
+  }
+  const forgotPassword = () => {
+      router.replace('/forgotPassword')
   }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -103,6 +103,12 @@ const page = () => {
                 </FormItem>
               )}
             />
+            <span 
+              onClick={forgotPassword} 
+              style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+            >
+              Forgot Password
+            </span>
             <Button type="submit" disabled={isSubmitting}>
               {
                 isSubmitting ? (
