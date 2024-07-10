@@ -102,13 +102,13 @@ const page = () => {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /><br></br>
             <span 
               onClick={forgotPassword} 
               style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
             >
               Forgot Password
-            </span>
+            </span><br></br>
             <Button type="submit" disabled={isSubmitting}>
               {
                 isSubmitting ? (
