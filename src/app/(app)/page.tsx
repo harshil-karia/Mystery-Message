@@ -42,7 +42,8 @@ const Home = () => {
           <CarouselNext />
         </Carousel>
     </main>
-    <footer className="text-center p-4 md:p-6">&copy;2024 Mystrey Message. All rights reserved</footer></>
+    {/* <footer className="text-center p-4 md:p-6">&copy;2024 Mystrey Message. All rights reserved</footer> */}
+    </>
   )
 }
 

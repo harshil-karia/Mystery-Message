@@ -105,7 +105,7 @@ const page = () => {
             /><br></br>
             <span 
               onClick={forgotPassword} 
-              style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+              style={{ cursor: 'pointer', color: 'blue' }}
             >
               Forgot Password
             </span><br></br>

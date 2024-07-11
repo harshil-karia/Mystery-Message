@@ -19,7 +19,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
-import { X } from "lucide-react";
+import { Trash2, X } from "lucide-react";
 import { Message } from "@/model/User";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
@@ -66,8 +66,8 @@ const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
         <CardTitle>{message.content}</CardTitle>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive">
-              <X className="w-5 h-5" />
+            <Button variant="destructive" title="delete message">
+              <Trash2 className="w-5 h-5" />
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
