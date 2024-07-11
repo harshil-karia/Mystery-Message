@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Loader2 } from 'lucide-react';
+import { Loader2, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { CardHeader, CardContent, Card } from '@/components/ui/card';
@@ -24,6 +24,7 @@ import { ApiResponse } from '@/types/APIResponse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
+import { containsBadWords } from '@/helpers/detectBadWords';
 
 const specialChar = '||';
 
@@ -59,32 +60,41 @@ export default function SendMessage() {
   };
 
   const [isLoading, setIsLoading] = useState(false);
-
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
-    setIsLoading(true);
-    try {
-      const response = await axios.post<ApiResponse>('/api/send-message', {
-        ...data,
-        username,
-      });
-
+    const isBad = containsBadWords(data.content);
+    if(isBad){
       toast({
-        title: response.data.message,
-        variant: 'default',
-      });
-      form.reset({ ...form.getValues(), content: '' });
-    } catch (error) {
-      const axiosError = error as AxiosError<ApiResponse>;
-      toast({
-        title: 'Error',
-        description:
-          axiosError.response?.data.message ?? 'Failed to sent message',
+        title: "Be carefull",
+        description: "Your message violates the Community guidlines",
         variant: 'destructive',
       });
-    } finally {
-      setIsLoading(false);
     }
-  };
+    else{
+      setIsLoading(true);
+        try {
+          const response = await axios.post<ApiResponse>('/api/send-message', {
+            ...data,
+            username,
+          });
+    
+          toast({
+            title: response.data.message,
+            variant: 'default',
+          });
+          form.reset({ ...form.getValues(), content: '' });
+        } catch (error) {
+          const axiosError = error as AxiosError<ApiResponse>;
+          toast({
+            title: 'Error',
+            description:
+              axiosError.response?.data.message ?? 'Failed to sent message',
+            variant: 'destructive',
+          });
+        } finally {
+          setIsLoading(false);
+        }
+      };
+    }
 
   const fetchSuggestedMessages = async () => {
     try {
@@ -97,7 +107,11 @@ export default function SendMessage() {
       })
     } catch (error) {
       console.error('Error fetching messages:', error);
-      // Handle error appropriately
+      toast({
+        title: 'Opps! Sorry',
+        description: 'There is some error in sending message',
+        variant: 'destructive'       
+      })
     }
   };
 

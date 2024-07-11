@@ -41,7 +41,9 @@ const Navbar: React.FC = () => {
               </Link>
             ) : (
               <Link className='w-full md:w-auto' href='/sign-in'>
-                <Button><LogIn></LogIn></Button>
+                <Button title='Login'>
+                  <LogIn></LogIn>
+                  </Button>
               </Link>
             )
           )}

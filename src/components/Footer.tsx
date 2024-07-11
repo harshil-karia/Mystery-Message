@@ -1,7 +1,7 @@
 // components/Footer.tsx
 import React from 'react';
 import Link from 'next/link';
-import { Github, Instagram, Twitter } from 'lucide-react';
+import { Github, Instagram, Linkedin, Twitter } from 'lucide-react';
 import ContactUs from './ContactUs';
 
 const Footer: React.FC = () => {
@@ -25,6 +25,9 @@ const Footer: React.FC = () => {
           </Link>
           <Link href="https://x.com/karia__harshil" target="_blank" rel="noopener noreferrer">
             <Twitter className="cursor-pointer" size="24" />
+          </Link>
+          <Link href="https://www.linkedin.com/in/harshil-karia-658694293/" target="_blank" rel="noopener noreferrer">
+            <Linkedin className="cursor-pointer" size="24" />
           </Link>
           <ContactUs />
         </div>
