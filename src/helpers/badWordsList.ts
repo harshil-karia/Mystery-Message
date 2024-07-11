@@ -7,7 +7,7 @@ export const badWordsList = {
       'chodna', 'gand', 'jhat', 'chut', 'bhainchod', 'lauda', 'bhadwa', 'randi', 'kamini', 
       'kamina', 'kutta', 'kutti', 'chutiya', 'besharam', 'harami','chutiyo', 'benchod', 'gandu', 'madarchod', 'bhosdiwala', 'lund', 'harami', 'sala', 
       'kamine', 'chus', 'chot', 'bhens', 'bhenchod', 'chodan', 'chudilo', 'randapo', 'madarchod', 
-      'gandi', 'chutiyapo', 'kandap', 'gand', 'kasab', 'chotvu','nigga','teri maa ki', 'teri behen ki','gand mara', 'tari maa ni'
+      'gandi', 'chutiyapo', 'kandap', 'gand', 'kasab', 'chotvu','nigga','teri maa ki', 'teri behen ki','gand mara', 'tari maa ni','piko','trai masi no','chodamna','ghanto'
     ],
   };
   
