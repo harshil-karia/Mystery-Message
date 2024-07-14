@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
       </div><br></br>
       <div className="text-center mt-4 text-gray-300 text-sm">
         Developed By
-        <Link href="https://www.linkedin.com/in/harshil-karia-658694293/" target="_blank" rel="noopener noreferrer"className="text-gray-300 text-sm ml-1 hover:text-white mr-4">
+        <Link href="https://harshil-karia.netlify.app/" target="_blank" rel="noopener noreferrer"className="text-gray-300 text-sm ml-1 hover:text-white mr-4">
            HARSHIL KARIA
         </Link>
       </div>

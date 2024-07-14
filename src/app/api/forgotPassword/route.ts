@@ -18,7 +18,6 @@ export async function POST(request:Request) {
         }
         const username = existingUser.username;
         const response = await sendChangePasswordEmail(email,username);
-        console.log("===Response===",response)
         if(!response){
             return Response.json({
                 success: false,

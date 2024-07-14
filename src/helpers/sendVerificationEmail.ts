@@ -15,7 +15,6 @@ export async function sendVerificationEmail(
             subject: 'Mystrey Message | Verification Email',
             react: VerificationEmail({ username, otp: verifyCode }),
           });
-
         return {
             success:true,
             message: "Verifiaction Email sent successfully"
